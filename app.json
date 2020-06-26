@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Netflix",
+    "slug": "Netflix",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash2.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "clone.netflix"
+    },
+    "android": {
+      "package": "clone.netflix"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  }
+}
