@@ -1,7 +1,7 @@
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoder';
 
-export const GetLocation = () => {
+export const getLocation = () => {
     return new Promise((resolve, reject) => {
         Geolocation.getCurrentPosition(info => {
             resolve(info);
@@ -13,7 +13,7 @@ export const GetLocation = () => {
     
 }
 
-export const FilterByCountry = async (movies, geolocation) => {
+export const filterByCountry = async (movies, geolocation) => {
     const position = {
         lat: geolocation.coords.latitude, 
         lng: geolocation.coords.longitude
@@ -29,6 +29,6 @@ export const FilterByCountry = async (movies, geolocation) => {
             );
             
     });
-
+    
     return national;
 }

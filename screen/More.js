@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import Avatar from '../components/Avatar';
-import {View} from 'react-native';
-import {MaterialIcons} from '@expo/vector-icons';
+import React from "react";
+import styled from "styled-components/native";
+import Avatar from "../components/Avatar";
+import { View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { ProfileContext } from "../context/ProfileContext";
 
 const Screen = styled.View`
   flex: 1;
@@ -39,28 +40,28 @@ const ButtonLabel = styled.Text`
 
 let profilesAvailables = [
   {
-    icon: require('../assets/avatars/avatar1.png'),
-    name: 'José',
+    icon: require("../assets/avatars/avatar1.png"),
+    name: "José",
     uri: null,
   },
   {
-    icon: require('../assets/avatars/avatar2.png'),
-    name: 'Luiz',
+    icon: require("../assets/avatars/avatar2.png"),
+    name: "Luiz",
     uri: null,
   },
   {
-    icon: require('../assets/avatars/avatar3.png'),
-    name: 'João',
+    icon: require("../assets/avatars/avatar3.png"),
+    name: "João",
     uri: null,
   },
   {
-    icon: require('../assets/avatars/avatar4.png'),
-    name: 'Maria',
+    icon: require("../assets/avatars/avatar4.png"),
+    name: "Maria",
     uri: null,
   },
   {
-    icon: require('../assets/avatars/avatar5.png'),
-    name: 'Pedro',
+    icon: require("../assets/avatars/avatar5.png"),
+    name: "Pedro",
     uri: null,
   },
 ];
@@ -84,39 +85,49 @@ const replaceAvatarsWithImage = (props, profilesAvailables) => {
 };
 
 const selectProfile = (navigation, item) => {
-  navigation.navigate('Home', {name: item.name});
+  navigation.navigate("Home", { name: item.name });
 };
 
 const editProfile = (navigation, profiles) => {
-  navigation.navigate('ProfileToEdit', {profiles: profiles});
+  navigation.navigate("ProfileToEdit", { profiles: profiles });
 };
 
 const More = (props) => {
   replaceAvatarsWithImage(props, profilesAvailables);
 
   return (
-    <Screen>
-      <AvantarsContainer>
-        <Row horizontal>
-          {profilesAvailables.map((item) => {
-            return (
-              <Avatar
-                key={item.name}
-                image={item.icon}
-                uri={item.uri}
-                name={item.name}
-                onPress={(item) => selectProfile(props.navigation, item)}
-              />
-            );
-          })}
-        </Row>
-      </AvantarsContainer>
-      <NetflixButton
-        onPress={() => editProfile(props.navigation, profilesAvailables)}>
-        <MaterialIcons name="edit" size={24} color="gray" />
-        <ButtonLabel>Gerenciar perfis</ButtonLabel>
-      </NetflixButton>
-    </Screen>
+    <ProfileContext.Consumer>
+      {({ user, changeProfile }) => {
+        return (
+          <Screen>
+            <AvantarsContainer>
+              <Row horizontal>
+                {profilesAvailables.map((item) => {
+                  return (
+                    <Avatar
+                      key={item.name}
+                      image={item.icon}
+                      uri={item.uri}
+                      name={item.name}
+                      onPress={() => {
+                        changeProfile(item);
+                        selectProfile(props.navigation, item);
+                      }}
+                    />
+                  );
+                })}
+              </Row>
+            </AvantarsContainer>
+            <NetflixButton
+              onPress={() => editProfile(props.navigation, profilesAvailables)}
+            >
+              <MaterialIcons name="edit" size={24} color="gray" />
+              <ButtonLabel>Gerenciar perfis</ButtonLabel>
+            </NetflixButton>
+          </Screen>
+        );
+      }}
+    </ProfileContext.Consumer>
   );
 };
 
