@@ -40,12 +40,12 @@ const ButtonLabel = styled.Text`
 let profilesAvailables = [
   {
     icon: require('../assets/avatars/avatar1.png'),
-    name: 'Karina',
+    name: 'José',
     uri: null,
   },
   {
     icon: require('../assets/avatars/avatar2.png'),
-    name: 'Carol',
+    name: 'Luiz',
     uri: null,
   },
   {
@@ -60,7 +60,7 @@ let profilesAvailables = [
   },
   {
     icon: require('../assets/avatars/avatar5.png'),
-    name: 'André',
+    name: 'Pedro',
     uri: null,
   },
 ];
